@@ -1542,6 +1542,8 @@ def disk_usage(path):
                 import subprocess
                 call = subprocess.Popen(["df", "-k", path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 output = call.communicate()[0]
+                if int(output.split("\n")[1].split()[3]) == 0 && int(output.split("\n")[1].split()[2]) == 0 && int(output.split("\n")[1].split()[1]) == 0 : 
+                    raise Exception("Unable to determine free space on your OS")
                 return int(output.split("\n")[1].split()[3]) * 1024
             except Exception:
                 pass
